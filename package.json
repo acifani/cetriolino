@@ -1,0 +1,17 @@
+{
+  "name": "cetriolino",
+  "version": "0.0.1",
+  "description": "Simple key-value database",
+  "main": "lib/index.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Alessandro Cifani",
+  "license": "MIT",
+  "repository": "github:acifani/cetriolino",
+  "devDependencies": {
+    "@types/node": "^10.12.9",
+    "typescript": "^3.1.6"
+  }
+}
