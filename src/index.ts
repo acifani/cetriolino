@@ -2,26 +2,39 @@ import * as fs from 'fs'
 
 type Key = string
 type Value = any
-type DB = { [key: string]: any }
+type DB = {
+    [key: string]: any
+}
 
 export default class Cetriolino {
     private db: DB = {}
+    private autoDump: boolean
+    private filePath: string
 
-    constructor(filePath: string) {
+    constructor(filePath: string, autoDump: boolean) {
+        this.filePath = filePath
         this.load(filePath)
+        this.autoDump = autoDump
     }
 
     get(key: Key): Value {
         return this.db[key]
     }
 
-    set(key: Key, value: any): DB { 
-        this.db[key] = value 
+    set(key: Key, value: any): DB {
+        this.db[key] = value
+        if (this.autoDump) {
+            this.dump(this.filePath)
+        }
         return this.db
     }
 
     remove(key: Key): boolean {
-        return delete this.db[key]
+        const removed = delete this.db[key]
+        if (this.autoDump) {
+            this.dump(this.filePath)
+        }
+        return removed
     }
 
     exists(key: Key): boolean {
@@ -38,10 +51,19 @@ export default class Cetriolino {
 
     private load(filePath: string) {
         try {
-            const content = fs.readFileSync(filePath);
+            const content = fs.readFileSync(filePath)
             this.db = JSON.parse(content.toString()) || {}
         } catch (e) {
             throw e
         }
+    }
+
+    dump(filePath: string): void {
+        fs.writeFile(filePath, JSON.stringify(this.db), function(err) {
+            if (err) {
+                return console.log(err)
+            }
+            console.log('The db was saved!')
+        })
     }
 }
