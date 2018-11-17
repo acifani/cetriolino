@@ -11,7 +11,7 @@ export default class Cetriolino {
     private autoDump: boolean
     private filePath: string
 
-    constructor(filePath: string, autoDump: boolean) {
+    constructor(filePath: string, autoDump: boolean = false) {
         this.filePath = filePath
         this.load(filePath)
         this.autoDump = autoDump
@@ -42,7 +42,7 @@ export default class Cetriolino {
     }
 
     keys(): Iterable<Key> {
-        return this.db.keys()
+        return Object.keys(this.db)
     }
 
     clear(): void {
@@ -52,7 +52,8 @@ export default class Cetriolino {
     private load(filePath: string) {
         try {
             const content = fs.readFileSync(filePath)
-            this.db = JSON.parse(content.toString()) || {}
+            const json = content.toString()
+            this.db = json ? JSON.parse(json) : {}
         } catch (e) {
             throw e
         }
