@@ -55,7 +55,12 @@ export default class Cetriolino {
             const json = content.toString()
             this.db = json ? JSON.parse(json) : {}
         } catch (e) {
-            throw e
+            if (e.code === "ENOENT") {
+                this.db = {};
+            }
+            else {
+                throw e
+            }
         }
     }
 
