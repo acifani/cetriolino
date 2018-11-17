@@ -54,7 +54,12 @@ export default class Cetriolino {
             const content = fs.readFileSync(filePath)
             this.db = JSON.parse(content.toString()) || {}
         } catch (e) {
-            throw e
+            if (e.code === "ENOENT") {
+                this.db = {};
+            }
+            else {
+                throw e
+            }
         }
     }
 
