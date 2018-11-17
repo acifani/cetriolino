@@ -74,26 +74,66 @@ describe('cetriolino', () => {
     })
 
     describe('set', () => {
-        it('should set value when key does not exist', () => {})
-        it('should set value when key already exists', () => {})
-        it('should set object value when value is an object', () => {})
+        it('should set value when key does not exist', () => {
+            const inputValue = 'NEW_VALUE'
+            const inputKey = 'NEW_KEY'
+            _db.set(inputKey, inputValue)
+            const output = _db.get(inputKey)
+            expect(output).toBe(inputValue)
+        })
+
+        it('should set value when key already exists', () => {
+            const input = 'UPDATED_VALUE'
+            _db.set('one', input)
+            const output = _db.get('one')
+            expect(output).toBe(input)
+        })
+
+        it('should set object value when value is an object', () => {
+            const inputValue = { a: 'a', b: 'b' }
+            const inputKey = 'A_KEY'
+            _db.set(inputKey, inputValue)
+            const output = _db.get(inputKey)
+            expect(output).toEqual(inputValue)
+        })
     })
 
     describe('remove', () => {
-        it('should remove value when key exists', () => {})
-        it('should not throw when key does not exist', () => {})
-        it('should return true when key has been deleted', () => {})
-        it('should return false when key has not been deleted', () => {})
+        it('should remove value when key exists', () => {
+            _db.remove('one')
+            const output = _db.get('one');
+            expect(output).toBeUndefined()
+        })
+
+        it('should not throw when key does not exist', () => {
+            const action = () => _db.remove('DO_NOT_EXIST')
+            expect(action).not.toThrowError()
+        })
     })
 
     describe('exists', () => {
-        it('should return true when key exists', () => {})
-        it('should return false when key does not exist', () => {})
+        it('should return true when key exists', () => {
+            const output = _db.exists('one')
+            expect(output).toBe(true)
+        })
+
+        it('should return false when key does not exist', () => {
+            const output = _db.exists('DO_NOT_EXIST')
+            expect(output).toBe(false)
+        })
     })
 
     describe('keys', () => {
-        it('should return an empty array when db is empty', () => {})
-        it('should return all the keys when db is not empty', () => {})
+        it('should return an empty array when db is empty', () => {
+            _db.clear()
+            const output = _db.keys()
+            expect(output).toEqual([])
+        })
+
+        it('should return all the keys when db is not empty', () => {
+            const output = _db.keys()
+            expect(output).toEqual(Object.keys(VALID_JSON))
+        })
     })
 
     describe('clear', () => {
