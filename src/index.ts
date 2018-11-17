@@ -8,9 +8,13 @@ type DB = {
 
 export default class Cetriolino {
   private db: DB = {};
+  private autoDump: boolean;
+  private filePath: string;
 
-  constructor(filePath: string) {
-    this.load(filePath)
+  constructor(filePath: string, autoDump: boolean) {
+    this.filePath = filePath;
+    this.load(filePath);
+    this.autoDump = autoDump;
   }
 
   get(key: Key): Value {
@@ -19,11 +23,18 @@ export default class Cetriolino {
 
   set(key: Key, value: any): DB {
     this.db[key] = value;
+    if (this.autoDump) {
+      this.dump(this.filePath);
+    }
     return this.db;
   }
 
   remove(key: Key): boolean {
-    return delete this.db[key];
+    const removed = delete this.db[key];
+    if (this.autoDump) {
+      this.dump(this.filePath);
+    }
+    return removed;
   }
 
   exists(key: Key): boolean {
@@ -45,5 +56,14 @@ export default class Cetriolino {
     } catch (e) {
       throw e;
     }
+  }
+
+  dump(filePath: string): void {
+    fs.writeFile(filePath, JSON.stringify(this.db), function(err) {
+      if (err) {
+        return console.log(err);
+      }
+      console.log("The db was saved!");
+    });
   }
 }
