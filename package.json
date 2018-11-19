@@ -10,7 +10,7 @@
     "build": "rimraf dist && rollup -c rollup.config.js",
     "watch": "rollup -c rollup.config.js -w",
     "test": "jest",
-    "version": "auto-changelog && git add CHANGELOG.md"
+    "version": "auto-changelog -p && git add CHANGELOG.md"
   },
   "author": "Alessandro Cifani",
   "license": "MIT",
