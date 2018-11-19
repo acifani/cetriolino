@@ -19,6 +19,12 @@ export default class Cetriolino {
         return this.db[key]
     }
 
+    random(): Value {
+        const keys = this.keys()
+        const randomIndex = keys.length * Math.random() << 0
+        return this.get(keys[randomIndex])
+    }
+
     set(key: Key, value: any): void {
         this.db[key] = value
         if (this.autoDump) {
