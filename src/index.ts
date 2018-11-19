@@ -19,20 +19,20 @@ export default class Cetriolino {
         return this.db[key]
     }
 
-    set(key: Key, value: any): DB {
+    set(key: Key, value: any): boolean {
         this.db[key] = value
         if (this.autoDump) {
             this.dump()
         }
-        return this.db
+        return true
     }
 
     remove(key: Key): boolean {
-        const removed = delete this.db[key]
-        if (removed && this.autoDump) {
+        delete this.db[key]
+        if (this.autoDump) {
             this.dump()
         }
-        return removed
+        return true
     }
 
     exists(key: Key): boolean {
