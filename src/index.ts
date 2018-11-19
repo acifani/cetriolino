@@ -12,7 +12,7 @@ export default class Cetriolino {
     constructor(filePath: string, autoDump: boolean = false) {
         this.filePath = filePath
         this.autoDump = autoDump
-        this.load()
+        this.load(this.filePath)
     }
 
     get(key: Key): Value {
@@ -47,9 +47,9 @@ export default class Cetriolino {
         this.db = {}
     }
 
-    private load() {
+    load(filePath: string) {
         try {
-            const content = fs.readFileSync(this.filePath)
+            const content = fs.readFileSync(filePath)
             const json = content.toString()
             this.db = json ? JSON.parse(json) : {}
         } catch (e) {
