@@ -35,6 +35,13 @@ export default class Cetriolino {
         return true
     }
 
+    append(key: Key, value: Value): boolean {
+        let existingValue = this.get(key)
+        const newValue = existingValue ? existingValue += value : value
+        this.set(key, newValue)
+        return true
+    }
+
     exists(key: Key): boolean {
         return this.db[key] !== undefined
     }
