@@ -1,6 +1,6 @@
 {
   "name": "cetriolino",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Simple key-value database",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
