@@ -2,9 +2,7 @@ import * as fs from 'fs'
 
 type Key = string
 type Value = any
-type DB = {
-    [key: string]: any
-}
+type DB = { [key: string]: any }
 
 export default class Cetriolino {
     private db: DB = {}
@@ -13,8 +11,8 @@ export default class Cetriolino {
 
     constructor(filePath: string, autoDump: boolean = false) {
         this.filePath = filePath
-        this.load(filePath)
         this.autoDump = autoDump
+        this.load()
     }
 
     get(key: Key): Value {
@@ -24,15 +22,15 @@ export default class Cetriolino {
     set(key: Key, value: any): DB {
         this.db[key] = value
         if (this.autoDump) {
-            this.dump(this.filePath)
+            this.dump()
         }
         return this.db
     }
 
     remove(key: Key): boolean {
         const removed = delete this.db[key]
-        if (this.autoDump) {
-            this.dump(this.filePath)
+        if (removed && this.autoDump) {
+            this.dump()
         }
         return removed
     }
@@ -41,7 +39,7 @@ export default class Cetriolino {
         return this.db[key] !== undefined
     }
 
-    keys(): Iterable<Key> {
+    keys(): string[] {
         return Object.keys(this.db)
     }
 
@@ -49,27 +47,26 @@ export default class Cetriolino {
         this.db = {}
     }
 
-    private load(filePath: string) {
+    private load() {
         try {
-            const content = fs.readFileSync(filePath)
+            const content = fs.readFileSync(this.filePath)
             const json = content.toString()
             this.db = json ? JSON.parse(json) : {}
         } catch (e) {
-            if (e.code === "ENOENT") {
-                this.db = {};
-            }
-            else {
+            if (e.code === 'ENOENT') {
+                this.db = {}
+            } else {
                 throw e
             }
         }
     }
 
-    dump(filePath: string): void {
-        fs.writeFile(filePath, JSON.stringify(this.db), function(err) {
+    dump(): void {
+        const db = JSON.stringify(this.db)
+        fs.writeFile(this.filePath, db, err => {
             if (err) {
-                return console.log(err)
+                throw err
             }
-            console.log('The db was saved!')
         })
     }
 }
