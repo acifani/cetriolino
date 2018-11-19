@@ -1,0 +1,9 @@
+__tests__
+src
+.prettierrc
+.travis.yml
+.*cache
+cetriolino*.tgz
+jest.config.js
+rollup.config.js
+tsconfig.json

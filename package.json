@@ -3,10 +3,12 @@
   "version": "0.0.1",
   "description": "Simple key-value database",
   "main": "dist/index.js",
+  "module": "dist/index.es.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "prepare": "npm run build",
-    "build": "tsc",
+    "build": "rimraf dist && rollup -c rollup.config.js",
+    "watch": "rollup -c rollup.config.js -w",
     "test": "jest"
   },
   "author": "Alessandro Cifani",
@@ -16,6 +18,11 @@
     "@types/jest": "^23.3.9",
     "@types/node": "^10.12.9",
     "jest": "^23.6.0",
+    "rimraf": "^2.6.2",
+    "rollup": "^0.67.3",
+    "rollup-plugin-commonjs": "^9.2.0",
+    "rollup-plugin-node-resolve": "^3.4.0",
+    "rollup-plugin-typescript2": "^0.18.0",
     "ts-jest": "^23.10.4",
     "typescript": "^3.1.6"
   }
