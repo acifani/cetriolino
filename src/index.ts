@@ -21,7 +21,7 @@ export default class Cetriolino {
 
     random(): Value {
         const keys = this.keys()
-        const randomIndex = keys.length * Math.random() << 0
+        const randomIndex = (keys.length * Math.random()) << 0
         return this.get(keys[randomIndex])
     }
 
@@ -41,19 +41,12 @@ export default class Cetriolino {
 
     append(key: Key, value: Value): void {
         let existingValue = this.get(key)
-        const newValue = existingValue ? existingValue += value : value
+        const newValue = existingValue ? (existingValue += value) : value
         this.set(key, newValue)
     }
 
     exists(key: Key): boolean {
         return this.db[key] !== undefined
-    }
-
-    private throwIfNotArray(name: string): void {
-        const value = this.get(name)
-        if (!Array.isArray(value)) {
-            throw new Error("Key is not an Array")
-        }
     }
 
     lcreate(name: string): void {
@@ -91,7 +84,7 @@ export default class Cetriolino {
     lappend(name: string, position: number, value: Value): void {
         this.throwIfNotArray(name)
         let existingValue = this.db[name][position]
-        const newValue = existingValue ? existingValue += value : value
+        const newValue = existingValue ? (existingValue += value) : value
         this.db[name][position] = newValue
         if (this.autoDump) {
             this.dump()
@@ -142,5 +135,12 @@ export default class Cetriolino {
                 throw err
             }
         })
+    }
+
+    private throwIfNotArray(name: string): void {
+        const value = this.get(name)
+        if (!Array.isArray(value)) {
+            throw new Error('Key is not an Array')
+        }
     }
 }
