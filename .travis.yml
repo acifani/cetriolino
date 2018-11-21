@@ -6,3 +6,12 @@ cache:
     - '$HOME/.npm'
 script:
   - npm test
+  - npm run docs
+
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $githubToken
+  local_dir: docs
+  on:
+    branch: master
