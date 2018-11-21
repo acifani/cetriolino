@@ -1,8 +1,8 @@
 import * as fs from 'fs'
 
-type Key = string
-type Value = any
-type DB = { [key: string]: any }
+export type Key = string
+export type Value = any
+export type DB = { [key: string]: any }
 
 export default class Cetriolino {
     private db: DB = {}

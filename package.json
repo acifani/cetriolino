@@ -10,7 +10,8 @@
     "build": "rimraf dist && rollup -c rollup.config.js",
     "watch": "rollup -c rollup.config.js -w",
     "test": "jest",
-    "version": "auto-changelog -p && git add CHANGELOG.md"
+    "version": "auto-changelog -p && git add CHANGELOG.md",
+    "docs": "typedoc --theme minimal --mode file --entryPoint Cetriolino --out docs/  src/"
   },
   "author": "Alessandro Cifani",
   "license": "MIT",
@@ -26,6 +27,7 @@
     "rollup-plugin-node-resolve": "^3.4.0",
     "rollup-plugin-typescript2": "^0.18.0",
     "ts-jest": "^23.10.4",
+    "typedoc": "^0.13.0",
     "typescript": "^3.1.6"
   }
 }
