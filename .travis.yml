@@ -1,9 +1,7 @@
 language: node_js
-node_js:
-  - 'stable'
-cache:
-  directories:
-    - '$HOME/.npm'
+node_js: 'stable'
+cache: npm
+
 script:
   - npm test
   - npm run docs
