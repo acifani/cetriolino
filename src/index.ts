@@ -113,7 +113,7 @@ export default class Cetriolino {
      */
     lpush(name: string, value: Value | Value[]): number {
         this.throwIfNotArray(name)
-        const result = this.db[name].push([...value] || [])
+        const result = this.db[name].push(...value || [])
         if (this.autoDump) {
             this.dump()
         }
