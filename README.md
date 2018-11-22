@@ -1,5 +1,7 @@
 # cetriolino
 
+[![Build Status](https://travis-ci.com/acifani/cetriolino.svg?branch=master)](https://travis-ci.com/acifani/cetriolino)
+[![Maintainability](https://api.codeclimate.com/v1/badges/69afb67eeff5ce2364e0/maintainability)](https://codeclimate.com/github/acifani/cetriolino/maintainability)
 [![Greenkeeper badge](https://badges.greenkeeper.io/acifani/cetriolino.svg)](https://greenkeeper.io/)
 
 Simple key-value storage, with no runtime dependencies, 
