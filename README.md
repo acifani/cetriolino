@@ -1,5 +1,7 @@
 # cetriolino
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/acifani/cetriolino.svg)](https://greenkeeper.io/)
+
 Simple key-value storage, with no runtime dependencies, 
 written in TypeScript.
 
