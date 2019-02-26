@@ -17,7 +17,7 @@
   "license": "MIT",
   "repository": "github:acifani/cetriolino",
   "devDependencies": {
-    "@types/jest": "^23.3.9",
+    "@types/jest": "^24.0.9",
     "@types/node": "^10.12.9",
     "auto-changelog": "^1.10.2",
     "jest": "^23.6.0",
