@@ -6,15 +6,3 @@ updates:
     interval: monthly
     time: "04:00"
   open-pull-requests-limit: 10
-  ignore:
-  - dependency-name: rollup
-    versions:
-    - 2.35.1
-    - 2.38.2
-  - dependency-name: typedoc
-    versions:
-    - 0.20.20
-    - 0.20.6
-  - dependency-name: rollup-plugin-typescript2
-    versions:
-    - 0.29.0
